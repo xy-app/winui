@@ -1,0 +1,56 @@
+{
+  "name": "加解密与编解码套件",
+  "description": "基于 WebAssembly 沙箱执行的高性能哈希散列计算与数据编解码工具集",
+  "group": "算法 (Algorithm)",
+  "actions": {
+    "CalculateHash": {
+      "display_name": "计算哈希散列",
+      "description": "对输入文本执行 MD5、SHA-256、SHA-1 哈希计算，支持全大写格式输出",
+      "keywords": ["哈希", "加密", "散列", "md5", "sha256", "sha1"],
+      "fields": {
+        "input_text": {
+          "display_name": "输入文本",
+          "description": "待计算散列值的源字符串"
+        },
+        "algorithm": {
+          "display_name": "哈希算法",
+          "description": "选择散列算法：SHA256, MD5 或 SHA1"
+        },
+        "uppercase": {
+          "display_name": "输出大写",
+          "description": "是否转换为全大写十六进制字符串"
+        }
+      }
+    },
+    "Base64Codec": {
+      "display_name": "Base64 编解码",
+      "description": "执行 UTF-8 文本与 Base64 编码之间的互相转换",
+      "keywords": ["base64", "编码", "解码"],
+      "fields": {
+        "input_text": {
+          "display_name": "输入文本",
+          "description": "待编码的原文本，或待解码的 Base64 字符串"
+        },
+        "mode": {
+          "display_name": "操作模式",
+          "description": "选择编码 (Encode) 还是解码 (Decode)"
+        }
+      }
+    },
+    "UrlCodec": {
+      "display_name": "URL 编解码",
+      "description": "执行 URL 百分号转义编码与解码还原",
+      "keywords": ["url", "转义", "编码", "解码"],
+      "fields": {
+        "input_text": {
+          "display_name": "输入文本",
+          "description": "待转义或待解码的 URL 文本"
+        },
+        "mode": {
+          "display_name": "操作模式",
+          "description": "选择编码 (Encode) 还是解码 (Decode)"
+        }
+      }
+    }
+  }
+}

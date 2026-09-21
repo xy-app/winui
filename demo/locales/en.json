@@ -1,0 +1,56 @@
+{
+  "name": "Crypto & Codec Suite",
+  "description": "High-performance data hashing and encoding toolkit powered by WebAssembly",
+  "group": "Algorithm",
+  "actions": {
+    "CalculateHash": {
+      "display_name": "Calculate Hash",
+      "description": "Compute MD5, SHA-256, or SHA-1 cryptographic hashes from input string",
+      "keywords": ["hash", "crypto", "md5", "sha256", "sha1"],
+      "fields": {
+        "input_text": {
+          "display_name": "Input Text",
+          "description": "Source text to calculate hash from"
+        },
+        "algorithm": {
+          "display_name": "Algorithm",
+          "description": "Hash algorithm: SHA256, MD5, or SHA1"
+        },
+        "uppercase": {
+          "display_name": "Uppercase",
+          "description": "Whether to format output hex string in uppercase"
+        }
+      }
+    },
+    "Base64Codec": {
+      "display_name": "Base64 Codec",
+      "description": "Convert text to and from standard Base64 encoding",
+      "keywords": ["base64", "encode", "decode", "codec"],
+      "fields": {
+        "input_text": {
+          "display_name": "Input Text",
+          "description": "Raw string to encode or Base64 string to decode"
+        },
+        "mode": {
+          "display_name": "Operation Mode",
+          "description": "Operation mode: Encode or Decode"
+        }
+      }
+    },
+    "UrlCodec": {
+      "display_name": "URL Codec",
+      "description": "Escape and unescape URL components",
+      "keywords": ["url", "encode", "decode", "uri"],
+      "fields": {
+        "input_text": {
+          "display_name": "Input Text",
+          "description": "URL text to encode or decode"
+        },
+        "mode": {
+          "display_name": "Operation Mode",
+          "description": "Operation mode: Encode or Decode"
+        }
+      }
+    }
+  }
+}

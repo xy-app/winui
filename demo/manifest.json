@@ -1,0 +1,107 @@
+{
+  "plugin_id": "xy_wasm_crypto",
+  "name": "Crypto & Codec Suite",
+  "version": "1.0.0",
+  "description": "WebAssembly-powered sandboxed data hashing (MD5, SHA-256, SHA-1) and encoding (Base64, URL Encode) suite.",
+  "group": "算法 (Algorithm)",
+  "group_icon": "🔐",
+  "order": 85,
+  "actions": [
+    {
+      "tag": "CalculateHash",
+      "display_name": "计算哈希散列 (Calculate Hash)",
+      "icon": "#️⃣",
+      "description": "对输入文本执行高精度安全哈希计算 (支持 MD5, SHA-256, SHA-1)，可配置大写格式",
+      "keywords": ["hash", "md5", "sha256", "sha1", "crypto", "散列", "哈希", "加密"],
+      "fields": [
+        {
+          "name": "input_text",
+          "display_name": "输入文本",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "Hello World",
+          "presets": ["Hello World", "123456", "API_SECRET_KEY"],
+          "description": "待计算散列值的源字符串数据"
+        },
+        {
+          "name": "algorithm",
+          "display_name": "哈希算法",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "SHA256",
+          "presets": ["SHA256", "MD5", "SHA1"],
+          "description": "散列哈希算法类型：SHA256, MD5 或 SHA1"
+        },
+        {
+          "name": "uppercase",
+          "display_name": "输出大写",
+          "intrinsic_type": "boolean",
+          "default_type": "boolean",
+          "default_value": "false",
+          "presets": ["false", "true"],
+          "description": "是否将生成的十六进制哈希字符串转为全大写字母"
+        }
+      ],
+      "output_type": "string"
+    },
+    {
+      "tag": "Base64Codec",
+      "display_name": "Base64 编解码 (Base64 Codec)",
+      "icon": "📦",
+      "description": "执行 UTF-8 文本与标准 Base64 编码之间的互相转换",
+      "keywords": ["base64", "encode", "decode", "codec", "编码", "解码"],
+      "fields": [
+        {
+          "name": "input_text",
+          "display_name": "输入文本",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "Hello World",
+          "presets": ["Hello World", "SGVsbG8gV29ybGQ="],
+          "description": "待编码的原文本，或待解码的 Base64 字符串"
+        },
+        {
+          "name": "mode",
+          "display_name": "操作模式",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "Encode",
+          "presets": ["Encode", "Decode"],
+          "description": "转换模式：Encode (编码为 Base64) 或 Decode (还原为原文本)"
+        }
+      ],
+      "output_type": "string"
+    },
+    {
+      "tag": "UrlCodec",
+      "display_name": "URL 编解码 (URL Codec)",
+      "icon": "🔗",
+      "description": "执行 URL URI 组件转义编码与解码还原",
+      "keywords": ["url", "encode", "decode", "uri", "percent-encoding", "转义"],
+      "fields": [
+        {
+          "name": "input_text",
+          "display_name": "输入文本",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "https://example.com/search?keyword=测试自动化",
+          "presets": [
+            "https://example.com/search?keyword=测试自动化",
+            "hello%20world%21"
+          ],
+          "description": "待进行 URL 百分号转义或解码还原的文本"
+        },
+        {
+          "name": "mode",
+          "display_name": "操作模式",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "Encode",
+          "presets": ["Encode", "Decode"],
+          "description": "转换模式：Encode (URL 转义编码) 或 Decode (URL 解码还原)"
+        }
+      ],
+      "output_type": "string"
+    }
+  ]
+}
