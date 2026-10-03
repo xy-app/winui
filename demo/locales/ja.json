@@ -1,0 +1,56 @@
+{
+  "name": "暗号化とコーデックスイート",
+  "description": "WebAssemblyサンドボックス上で動作する高性能ハッシュ計算およびデータエンコード/デコードツールキット",
+  "group": "アルゴリズム",
+  "actions": {
+    "CalculateHash": {
+      "display_name": "ハッシュ計算",
+      "description": "入力テキストに対してMD5、SHA-256、SHA-1の暗号ハッシュを計算し、大文字出力もサポートします",
+      "keywords": ["ハッシュ", "暗号化", "md5", "sha256", "sha1", "ダイジェスト"],
+      "fields": {
+        "input_text": {
+          "display_name": "入力テキスト",
+          "description": "ハッシュ値を計算する対象の文字列"
+        },
+        "algorithm": {
+          "display_name": "ハッシュアルゴリズム",
+          "description": "アルゴリズムの選択: SHA256、MD5、または SHA1"
+        },
+        "uppercase": {
+          "display_name": "大文字出力",
+          "description": "16進数文字列をすべて大文字にするかどうか"
+        }
+      }
+    },
+    "Base64Codec": {
+      "display_name": "Base64 エンコード/デコード",
+      "description": "UTF-8テキストと標準Base64エンコード間の相互変換を実行します",
+      "keywords": ["base64", "エンコード", "デコード", "コーデック"],
+      "fields": {
+        "input_text": {
+          "display_name": "入力テキスト",
+          "description": "エンコード対象のテキスト、またはデコード対象のBase64文字列"
+        },
+        "mode": {
+          "display_name": "操作モード",
+          "description": "エンコード (Encode) または デコード (Decode) の選択"
+        }
+      }
+    },
+    "UrlCodec": {
+      "display_name": "URL エンコード/デコード",
+      "description": "URLパーセントエンコーディングによるエスケープおよびデコードを実行します",
+      "keywords": ["url", "エンコード", "デコード", "エスケープ"],
+      "fields": {
+        "input_text": {
+          "display_name": "入力テキスト",
+          "description": "エスケープまたはデコードするURL文字列"
+        },
+        "mode": {
+          "display_name": "操作モード",
+          "description": "エンコード (Encode) または デコード (Decode) の選択"
+        }
+      }
+    }
+  }
+}

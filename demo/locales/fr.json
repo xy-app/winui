@@ -1,0 +1,56 @@
+{
+  "name": "Suite Cryptographie et Codecs",
+  "description": "Boîte à outils de hachage et d'encodage haute performance exécutée dans le bac à sable WebAssembly",
+  "group": "Algorithmes",
+  "actions": {
+    "CalculateHash": {
+      "display_name": "Calculer le hachage",
+      "description": "Calcule les empreintes MD5, SHA-256 ou SHA-1 à partir d'un texte d'entrée avec option majuscules",
+      "keywords": ["hachage", "crypto", "md5", "sha256", "sha1", "empreinte"],
+      "fields": {
+        "input_text": {
+          "display_name": "Texte d'entrée",
+          "description": "Texte source dont le hachage doit être calculé"
+        },
+        "algorithm": {
+          "display_name": "Algorithme de hachage",
+          "description": "Algorithme sélectionné : SHA256, MD5 ou SHA1"
+        },
+        "uppercase": {
+          "display_name": "Majuscules",
+          "description": "Indique si la chaîne hexadécimale de sortie doit être en majuscules"
+        }
+      }
+    },
+    "Base64Codec": {
+      "display_name": "Codec Base64",
+      "description": "Convertit le texte UTF-8 en encodage Base64 et inversement",
+      "keywords": ["base64", "encoder", "décoder", "codec"],
+      "fields": {
+        "input_text": {
+          "display_name": "Texte d'entrée",
+          "description": "Texte brut à encoder ou chaîne Base64 à décoder"
+        },
+        "mode": {
+          "display_name": "Mode d'opération",
+          "description": "Choisir le mode : Encode (Encoder) ou Decode (Décoder)"
+        }
+      }
+    },
+    "UrlCodec": {
+      "display_name": "Codec URL",
+      "description": "Échappe et restaure les composants d'URL avec l'encodage pour cent",
+      "keywords": ["url", "encoder", "décoder", "uri", "échappement"],
+      "fields": {
+        "input_text": {
+          "display_name": "Texte d'entrée",
+          "description": "Texte d'URL à encoder ou décoder"
+        },
+        "mode": {
+          "display_name": "Mode d'opération",
+          "description": "Choisir le mode : Encode (Encoder) ou Decode (Décoder)"
+        }
+      }
+    }
+  }
+}

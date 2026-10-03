@@ -1,3 +1,8 @@
-# Cargo
-**/target/
-*.lock
+target/
+Cargo.lock
+*.wasm
+*.pdb
+*.exp
+*.lib
+.DS_Store
+Thumbs.db

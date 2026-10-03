@@ -1,0 +1,56 @@
+{
+  "name": "加解密與編解碼套件",
+  "description": "基於 WebAssembly 沙箱執行的高效能雜湊散列計算與資料編解碼工具組",
+  "group": "演算法邏輯",
+  "actions": {
+    "CalculateHash": {
+      "display_name": "計算雜湊散列",
+      "description": "對輸入文字執行 MD5、SHA-256、SHA-1 雜湊計算，支援全大寫格式輸出",
+      "keywords": ["雜湊", "加密", "散列", "md5", "sha256", "sha1"],
+      "fields": {
+        "input_text": {
+          "display_name": "輸入文字",
+          "description": "待計算雜湊值的來源字串"
+        },
+        "algorithm": {
+          "display_name": "雜湊演算法",
+          "description": "選擇雜湊演算法：SHA256, MD5 或 SHA1"
+        },
+        "uppercase": {
+          "display_name": "輸出大寫",
+          "description": "是否轉換為全大寫十六進位字串"
+        }
+      }
+    },
+    "Base64Codec": {
+      "display_name": "Base64 編解碼",
+      "description": "執行 UTF-8 文字與 Base64 編碼之間的互相轉換",
+      "keywords": ["base64", "編碼", "解碼"],
+      "fields": {
+        "input_text": {
+          "display_name": "輸入文字",
+          "description": "待編碼的原文字，或待解碼的 Base64 字串"
+        },
+        "mode": {
+          "display_name": "操作模式",
+          "description": "選擇編碼 (Encode) 還是解碼 (Decode)"
+        }
+      }
+    },
+    "UrlCodec": {
+      "display_name": "URL 編解碼",
+      "description": "執行 URL 百分比跳脫編碼與解碼還原",
+      "keywords": ["url", "跳脫", "編碼", "解碼"],
+      "fields": {
+        "input_text": {
+          "display_name": "輸入文字",
+          "description": "待跳脫或待解碼的 URL 文字"
+        },
+        "mode": {
+          "display_name": "操作模式",
+          "description": "選擇編碼 (Encode) 還是解碼 (Decode)"
+        }
+      }
+    }
+  }
+}

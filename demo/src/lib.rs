@@ -18,7 +18,7 @@ use std::collections::HashMap;
 // 1. WASM Standard Communication Protocol Models
 // ----------------------------------------------------------------------------
 
-/// Standard input structure delivered by the XY Runner host
+/// Standard input structure delivered by the 小友+ host
 #[derive(Debug, Clone, Deserialize)]
 pub struct WasmExecutionInput {
     /// Target action tag name (e.g., "CalculateHash", "Base64Codec", "UrlCodec")
@@ -31,7 +31,7 @@ pub struct WasmExecutionInput {
     pub variables: HashMap<String, String>,
 }
 
-/// Standard output structure returned to the XY Runner host
+/// Standard output structure returned to the 小友+ host
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WasmExecutionOutput {
     /// Whether the action executed successfully
@@ -345,7 +345,7 @@ mod tests {
 
     #[test]
     fn test_base64_encode_and_decode_roundtrip() {
-        let original_text = "Automation with XY Runner is fast & safe! 🚀";
+        let original_text = "Automation with 小友+ is fast & safe! 🚀";
 
         // Encode
         let mut encode_data = HashMap::new();
@@ -419,4 +419,56 @@ mod tests {
         assert_eq!(json_val["plugin_id"], "xy_wasm_crypto");
         assert_eq!(json_val["actions"].as_array().unwrap().len(), 3);
     }
+
+    #[test]
+    fn test_all_locales_integrity() {
+        let locales = ["zh_CN", "zh_TW", "en", "ja", "ko", "de", "fr", "ru"];
+        let required_actions = ["CalculateHash", "Base64Codec", "UrlCodec"];
+
+        for loc in locales {
+            let path = format!("locales/{}.json", loc);
+            let content = std::fs::read_to_string(&path)
+                .unwrap_or_else(|e| panic!("Locale file '{}' must exist: {}", path, e));
+            let val: serde_json::Value = serde_json::from_str(&content)
+                .unwrap_or_else(|e| panic!("Locale file '{}' must be valid JSON: {}", path, e));
+
+            assert!(
+                val.get("name").is_some(),
+                "Locale '{}' missing 'name' property",
+                loc
+            );
+            assert!(
+                val.get("description").is_some(),
+                "Locale '{}' missing 'description' property",
+                loc
+            );
+            let actions = val
+                .get("actions")
+                .and_then(|a| a.as_object())
+                .unwrap_or_else(|| panic!("Locale '{}' missing 'actions' object", loc));
+
+            for tag in &required_actions {
+                assert!(
+                    actions.contains_key(*tag),
+                    "Locale '{}' missing action override for '{}'",
+                    loc,
+                    tag
+                );
+                let act = &actions[*tag];
+                assert!(
+                    act.get("display_name").is_some(),
+                    "Locale '{}' action '{}' missing 'display_name'",
+                    loc,
+                    tag
+                );
+                assert!(
+                    act.get("description").is_some(),
+                    "Locale '{}' action '{}' missing 'description'",
+                    loc,
+                    tag
+                );
+            }
+        }
+    }
 }
+

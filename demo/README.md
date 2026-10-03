@@ -1,6 +1,8 @@
 # xy_wasm_crypto: 官方 WebAssembly 插件示例 (Multi-Action Demo)
 
-本工程是 **XY Runner** 官方提供的标准 WebAssembly 动作插件示例，演示如何构建一个具备**多动作路由分发、多语言国际化 (i18n)、安全沙箱与零系统依赖**的高性能 WASM 插件。
+[![Discord](https://img.shields.io/discord/832082456727257118?label=Discord&logo=discord&logoColor=white&color=5865F2)](https://discord.gg/g5Fh3FtfGx)
+
+本工程是 **小友+** 官方提供的标准 WebAssembly 动作插件示例，演示如何构建一个具备**多动作路由分发、多语言国际化 (i18n)、安全沙箱与零系统依赖**的高性能 WASM 插件。
 
 ---
 
@@ -23,9 +25,15 @@ xy_wasm_crypto/
 ├── Cargo.toml         # 独立自包含的项目配置（支持 wasm32-wasip1 / wasm32-unknown-unknown）
 ├── manifest.json      # 插件元数据清单（定义 3 个动作、参数标签、预设项 presets）
 ├── README.md          # 本工程说明
-├── locales/           # 多语言国际化补丁
-│   ├── zh_CN.json     # 简体中文翻译
-│   └── en.json        # 英文对照
+├── locales/           # 全套 8 种官方标准国际化多语言补丁
+│   ├── zh_CN.json     # 简体中文翻译 (Simplified Chinese)
+│   ├── zh_TW.json     # 繁体中文翻译 (Traditional Chinese)
+│   ├── en.json        # 英文对照 (English)
+│   ├── ja.json        # 日语翻译 (日本語)
+│   ├── ko.json        # 韩语翻译 (한국어)
+│   ├── de.json        # 德语翻译 (Deutsch)
+│   ├── fr.json        # 法语翻译 (Français)
+│   └── ru.json        # 俄语翻译 (Русский)
 └── src/
     └── lib.rs         # 核心动作实现、多动作分发路由器、WASM C-ABI 导出与单元测试
 ```
@@ -45,7 +53,7 @@ rustup target add wasm32-wasip1
 ```bash
 cargo test
 ```
-全部 6 个测试用例将自动验证：MD5/SHA256 计算、Base64 编解码往返、URL 编解码往返、多动作路由分发以及 Manifest 静态导出。
+全部 7 个测试用例将自动验证：MD5/SHA256 计算、Base64 编解码往返、URL 编解码往返、多动作路由分发、Manifest 静态导出以及全套 8 种多语言文件完整性校验。
 
 ### 3.3 编译 WebAssembly 产物
 执行交叉编译生成优化的 `.wasm` 文件：
@@ -57,7 +65,7 @@ cargo build --target wasm32-wasip1 --release
 
 ---
 
-## 4. 在 XY Runner 中安装与测试
+## 4. 在 小友+ 中安装与测试
 
 1. 创建本地用户插件目录（若不存在）：
    - **Windows**: `%USERPROFILE%\.xy-app\plugins\xy_wasm_crypto\`
@@ -66,4 +74,4 @@ cargo build --target wasm32-wasip1 --release
    - 编译出的 `xy_wasm_crypto.wasm` 重命名为 `plugin.wasm`
    - `manifest.json`
    - `locales/` 文件夹（可选，用于多语言支持）
-3. 重启或打开 XY Runner 应用程序，左侧动作库的“算法”分类下将自动出现这 3 个独立的动作节点！
+3. 重启或打开 小友+ 应用程序，左侧动作库的“算法”分类下将自动出现这 3 个独立的动作节点！

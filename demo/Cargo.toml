@@ -2,7 +2,7 @@
 name = "xy_wasm_crypto"
 version = "1.0.0"
 edition = "2024"
-authors = ["XY Runner Community Developers"]
+authors = ["小友+ Community Developers"]
 description = "Official WebAssembly Demo Plugin: High-performance Hash, Base64 & URL Codec Suite"
 license = "MIT OR Apache-2.0"
 

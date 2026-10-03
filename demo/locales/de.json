@@ -1,0 +1,56 @@
+{
+  "name": "Krypto- & Codec-Suite",
+  "description": "Hochleistungsfähiges Toolkit für Daten-Hashing und Kodierung in der WebAssembly-Sandbox",
+  "group": "Algorithmus",
+  "actions": {
+    "CalculateHash": {
+      "display_name": "Hash berechnen",
+      "description": "Berechnet MD5-, SHA-256- oder SHA-1-Kryptohashes aus eingegebenem Text mit Großschreibungsoption",
+      "keywords": ["hash", "krypto", "md5", "sha256", "sha1", "prüfsumme"],
+      "fields": {
+        "input_text": {
+          "display_name": "Eingabetext",
+          "description": "Quelltext zur Hash-Berechnung"
+        },
+        "algorithm": {
+          "display_name": "Hash-Algorithmus",
+          "description": "Auswahl des Hash-Algorithmus: SHA256, MD5 oder SHA1"
+        },
+        "uppercase": {
+          "display_name": "Großbuchstaben",
+          "description": "Ob der hexadezimale Ausgabe-String in Großbuchstaben formatiert werden soll"
+        }
+      }
+    },
+    "Base64Codec": {
+      "display_name": "Base64-Codec",
+      "description": "Konvertiert UTF-8-Text in Base64-Kodierung und umgekehrt",
+      "keywords": ["base64", "kodieren", "dekodieren", "codec"],
+      "fields": {
+        "input_text": {
+          "display_name": "Eingabetext",
+          "description": "Zu kodierender Text oder zu dekodierender Base64-String"
+        },
+        "mode": {
+          "display_name": "Betriebsmodus",
+          "description": "Modus auswählen: Encode (Kodieren) oder Decode (Dekodieren)"
+        }
+      }
+    },
+    "UrlCodec": {
+      "display_name": "URL-Codec",
+      "description": "Maskiert und demaskiert URL-Komponenten mittels Prozentkodierung",
+      "keywords": ["url", "kodieren", "dekodieren", "uri", "prozentkodierung"],
+      "fields": {
+        "input_text": {
+          "display_name": "Eingabetext",
+          "description": "Zu kodierender oder dekodierender URL-Text"
+        },
+        "mode": {
+          "display_name": "Betriebsmodus",
+          "description": "Modus auswählen: Encode (Kodieren) oder Decode (Dekodieren)"
+        }
+      }
+    }
+  }
+}

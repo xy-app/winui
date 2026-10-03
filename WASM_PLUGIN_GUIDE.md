@@ -1,8 +1,8 @@
-# XY Runner WebAssembly (WASM) 插件开发者完全指南
+# 小友+ WebAssembly (WASM) 插件开发者完全指南
 
-欢迎来到 **XY Runner 开放插件生态**！
+欢迎来到 **小友+ 开放插件生态**！
 
-XY Runner 是一款现代化的高性能桌面自动化与工作流编排系统。为了向全球第三方开发者与社区用户提供**绝对安全、跨平台一次编写处处运行 (Write Once, Run Everywhere)、极致轻量**的扩展能力，XY Runner 开放生态**全面基于 WebAssembly (WASI) 沙箱技术构建**。
+小友+ 是一款现代化的高性能桌面自动化与工作流编排系统。为了向全球第三方开发者与社区用户提供**绝对安全、跨平台一次编写处处运行 (Write Once, Run Everywhere)、极致轻量**的扩展能力，小友+ 开放生态**全面基于 WebAssembly (WASI) 沙箱技术构建**。
 
 本文档将带领您从零开始，在 10 分钟内完成一个高质量、跨平台的 WASM 动作插件的开发、调试、本地加载与市场发布。
 
@@ -10,13 +10,13 @@ XY Runner 是一款现代化的高性能桌面自动化与工作流编排系统�
 
 ## 1. 为什么选择 WebAssembly？(Why WASM?)
 
-与传统桌面软件要求用户下载并运行未知的 `.dll` / `.exe` 不同，XY Runner 坚决捍卫用户的数据安全与系统稳定性：
+与传统桌面软件要求用户下载并运行未知的 `.dll` / `.exe` 不同，小友+ 坚决捍卫用户的数据安全与系统稳定性：
 
 ```mermaid
 graph TD
     User["第三方开发者 (社区用户)"] -->|编译 Rust / Go / C / TS| Wasm["plugin.wasm (WebAssembly 字节码)"]
     Wasm -->|发布至插件市场| Store["插件市场 (安全审核与分发)"]
-    Store -->|一键下载安装| Host["XY Runner 客户端 (宿主应用)"]
+    Store -->|一键下载安装| Host["小友+ 客户端 (宿主应用)"]
     Host -->|严格沙箱加载| Sandbox["WASM 内存隔离沙箱 (WASI)"]
     Sandbox -->|双向受控 JSON 通信| Host
 ```
@@ -105,8 +105,8 @@ strip = true        # 剥离调试符号
           "display_name": "输入文本",
           "intrinsic_type": "string",
           "default_type": "string",
-          "default_value": "Hello XY Runner",
-          "presets": ["Hello XY Runner", "123456789"],
+          "default_value": "Hello 小友+",
+          "presets": ["Hello 小友+", "123456789"],
           "description": "需要反转处理的原始文本"
         }
       ],
@@ -242,7 +242,7 @@ cargo build --target wasm32-wasip1 --release
 
 ## 4. 单动作模式 vs 多动作套件模式 (Single vs Multi-Action)
 
-XY Runner 同时支持两种组织模式：
+小友+ 同时支持两种组织模式：
 
 ### 4.1 单动作极简模式 (适合独立微小工具)
 - **Manifest**: 在根级声明 `tag`、`display_name` 与 `fields`：
@@ -282,28 +282,49 @@ XY Runner 同时支持两种组织模式：
 
 ## 5. 多语言国际化规范 (Plugin i18n Guide)
 
-XY Runner 拥有原生多语言架构。您只需在插件目录下建立 `locales/` 目录，即可轻松实现全球化多语言界面！
+小友+ 拥有原生多语言架构。您只需在插件目录下建立 `locales/` 目录，即可轻松实现全球化多语言界面！
 
-### 5.1 目录组织
+### 5.1 目录组织与 8 种官方语言规范
+小友+ 全平台统一原生支持 8 种主流国际化语言。推荐在 `locales/` 目录下提供完整语言补丁文件：
+
+| 语言代码 | 语言名称 | 对应文件路径 | 状态 |
+| :--- | :--- | :--- | :--- |
+| `zh_CN` | 简体中文 (Simplified Chinese) | `locales/zh_CN.json` | 平台主语言/推荐 |
+| `zh_TW` | 繁体中文 (Traditional Chinese) | `locales/zh_TW.json` | 官方标准支持 |
+| `en` | 英语 (English) | `locales/en.json` | 国际通用/推荐 |
+| `ja` | 日语 (日本語) | `locales/ja.json` | 官方标准支持 |
+| `ko` | 韩语 (한국어) | `locales/ko.json` | 官方标准支持 |
+| `de` | 德语 (Deutsch) | `locales/de.json` | 官方标准支持 |
+| `fr` | 法语 (Français) | `locales/fr.json` | 官方标准支持 |
+| `ru` | 俄语 (Русский) | `locales/ru.json` | 官方标准支持 |
+
+目录树结构如下：
 ```
 my_plugin/
-├── manifest.json       # 默认英文或基准元数据
+├── manifest.json       # 默认基准元数据
 └── locales/
     ├── zh_CN.json      # 简体中文补丁
-    ├── en.json         # 英文对照
-    └── ja.json         # 日语对照 (可选)
+    ├── zh_TW.json      # 繁体中文补丁
+    ├── en.json         # 英文补丁
+    ├── ja.json         # 日语补丁
+    ├── ko.json         # 韩语补丁
+    ├── de.json         # 德语补丁
+    ├── fr.json         # 法语补丁
+    └── ru.json         # 俄语补丁
 ```
 
-### 5.2 编写 `locales/zh_CN.json`
-系统将在运行时自动读取并覆盖对应语言的显示名称、描述与预设项文本：
+### 5.2 编写 `locales/*.json`
+系统将在运行时自动读取并覆盖对应语言的显示名称、分类名称、动作描述与参数字段：
 ```json
 {
   "name": "我的工具箱",
   "description": "中文插件功能说明",
+  "group": "自定义 (Custom)",
   "actions": {
     "ReverseText": {
       "display_name": "文本反转器",
       "description": "倒序反转输入文本",
+      "keywords": ["反转", "文本", "reverse"],
       "fields": {
         "input_text": {
           "display_name": "输入文本",
@@ -354,8 +375,8 @@ my_plugin/
   1. `CalculateHash` (MD5 / SHA-256 / SHA-1 计算与大写控制)
   2. `Base64Codec` (Base64 编码与解码)
   3. `UrlCodec` (URL 百分号转义与解码)
-- **多语言**：内置 `locales/zh_CN.json` 与 `locales/en.json`
-- **自动化测试**：包含 6 个覆盖全部动作的完整单元测试。
+- **多语言**：内置全套 8 种语言补丁（`zh_CN`, `zh_TW`, `en`, `ja`, `ko`, `de`, `fr`, `ru`）
+- **自动化测试**：包含 7 个单元测试，全面覆盖动作运算、路由分发、Manifest 导出以及多语言完整性校验。
 
 进入该目录即可直接体验：
 ```bash
@@ -373,7 +394,7 @@ cargo build --target wasm32-wasip1 --release
 - **Windows**: `C:\Users\<用户名>\.xy-app\plugins\<plugin_id>\plugin.wasm`
 - **macOS / Linux**: `~/.xy-app/plugins/<plugin_id>/plugin.wasm`
 
-启动 XY Runner 即可在动作面板中看到并调试您的新插件。
+启动 小友+ 即可在动作面板中看到并调试您的新插件。
 
 ### 8.2 插件市场上架发布规范
 准备上架到官方插件市场时，请确保：
